@@ -1,0 +1,40 @@
+es (14 sloc)  334 Bytes
+   
+http://localhost:3001
+
+###
+POST  http://localhost:3001/user/login
+Content-Type: application/json
+
+{
+  "username": "Rakesh",
+  "password": "secret"
+}
+
+###
+POST http://localhost:3001/user/register
+Content-Type: application/json
+
+{
+  "userName": "Rakesh",
+  "password": "secret",
+  "email": "rakeshn1@n.edu"
+}
+
+###
+PUT http://localhost:3001/user/update
+Content-Type: application/json
+
+{
+  "id": "62a03f0acf1bbef73f6632b2",
+  "password": "secret2"
+}
+
+###
+DELETE http://localhost:3001/user/delete
+Content-Type: application/json
+
+{
+  "id": "62a03f0acf1bbef73f6632b2"
+}
+
