@@ -1,0 +1,48 @@
+es (14 sloc)  334 Bytes
+   
+http://localhost:3001
+
+###
+POST  http://localhost:3001/post/getPost
+Content-Type: application/json
+
+{
+  "id": "62a1626a7f8d0a2d0a6c683d"
+}
+
+###
+POST http://localhost:3001/post/create
+Content-Type: application/json
+
+{
+  "title": "post title",
+  "content": "post content",
+  "userId": "62a055b0020f13c93bb9eb8a"
+}
+
+###
+POST  http://localhost:3001/post/getUserPosts
+Content-Type: application/json
+
+{
+  "userId": "62a055b0020f13c93bb9eb8a"
+}
+
+###
+PUT http://localhost:3001/post/update
+Content-Type: application/json
+
+{
+  "id": "62a1633d7f8d0a2d0a6c6845",
+  "title": "updated post title",
+  "content": "updated post content"
+}
+
+###
+DELETE http://localhost:3001/post/delete
+Content-Type: application/json
+
+{
+  "id": "62a1626a7f8d0a2d0a6c683d"
+}
+
