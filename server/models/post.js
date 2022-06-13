@@ -3,7 +3,7 @@ const mongoose = require("mongoose");
 
 // 2. create schema for entity
 const postSchema = new mongoose.Schema({
-  title: { type: String, unique: true, required: true},
+  title: { type: String, required: true},
   content: { type: String, required: true},
   createdBy: { type: String, required: true},
   createdOn: { type: Date, required: true},
