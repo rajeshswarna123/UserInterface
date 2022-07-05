@@ -6,7 +6,7 @@ const bcrypt = require('bcryptjs');
 const userSchema = new mongoose.Schema({
   userName: { type: String, unique: true, required: true},
   password: { type: String, required: true},
-  email: { type: String, required: true},
+  email: { type: String},
   createdOn: { type: Date, required: true},
   modifiedOn: { type: Date, required: true}
 })
@@ -16,7 +16,7 @@ const User = mongoose.model("User", userSchema);
 
 // 4. create CRUD functions on model
 //CREATE a user
-async function register(userName, email, password) {
+async function register(userName, password) {
   const user = await getUser(userName);
   if(user) throw Error('Username already in use');
 
@@ -25,7 +25,6 @@ async function register(userName, email, password) {
 
   const newUser = await User.create({
     userName: userName,
-    email: email,
     password: hashed,
     createdOn: new Date(),
     modifiedOn: new Date()
