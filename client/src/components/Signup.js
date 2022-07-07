@@ -24,8 +24,8 @@ const Signup = (props) => {
       "POST")
       .then((data) => {
         if (!data.message) {
-          storeInlocalStorage();
-          console.log(data)
+          console.log(data);
+          storeInlocalStorage(data);
         }
       })
       .catch((error) => {
@@ -33,14 +33,10 @@ const Signup = (props) => {
       })
 
   }
-
-  const storeInlocalStorage = () => {
-    let copyUser = {...user};
-    copyUser.password = ''
-    localStorage.setItem('user', JSON.stringify(copyUser));
+  const storeInlocalStorage = (data) => {
+    localStorage.setItem('user', JSON.stringify(data));
     navigate("/profile")
   }
-
   return (
     <div className="col-6">
       <img src="" className="logo" alt="Posts App" />
@@ -51,7 +47,7 @@ const Signup = (props) => {
             <input
               type="text"
               className="form-control"
-              id="userName"
+              id="username"
               name='userName'
               onChange={onChange}
               value={userName}

@@ -26,7 +26,7 @@ router
   .post('/getUserPosts', async (req, res) => {
     try {
       const posts = await Post.getUserPosts(req.body.userId);
-      res.send({...posts});
+      res.send([...posts]);
     } catch(error) {
       res.status(401).send({ message: error.message }); 
     }

@@ -5,6 +5,7 @@ import {
   Route,
   BrowserRouter as Router,
   Routes,
+  useNavigate,
   Redirect,
 } from 'react-router-dom';
 import Signup from './components/Signup.js';
@@ -12,6 +13,7 @@ import Posts from './components/Posts';
 import Profile from './components/Profile';
 import { Component } from 'react';
 import { fetchData } from './Extensions';
+import AddPost from './components/AddPost';
 
 const posts = [
   {
@@ -35,30 +37,19 @@ class App extends Component {
   constructor(){
     super();
     this.state = {
-      posts: []
+      posts: [],
+      user: null,
     }
   }
-  getUserPosts = () => {
+  getUserPosts() {
     let user = localStorage.getItem('user');
     if (user) {
       let parseUser = JSON.parse(user);
-      let userId = parseUser.id;
-      fetchData("/post/getUserPosts",
-        {
-          userId,
-        },
-        "POST")
-        .then((data) => {
-          if (!data) {
-            this.setState({
-              posts : data
-            })
-            console.log(data)
-          }
-        })
-        .catch((error) => {
-          console.log(error)
-        })
+      let userId = parseUser.userName;
+      this.setState({
+        user: parseUser
+      })
+      
     }
   }
   componentDidMount() {
@@ -69,12 +60,13 @@ class App extends Component {
       <div className="App">
         <Router>
           <Routes>
-            <Route element={<Navigationbar />}>
+            <Route element={<Navigationbar/>}>
               <Route path="login" element={<Login />} />
               <Route path="register" element={<Signup />} />
               <Route path="profile" element={<Profile />} />
-              <Route path="posts" element={<Posts posts={posts} />} />
-              <Route path="/" element={<Posts posts={posts} />} />
+              <Route path="posts" element={<Posts user={this.state?.user} />} />
+              <Route path="create" element={<AddPost />} />
+              <Route path="/" element={<Posts user={this.state?.user}  />} />
             </Route>
           </Routes>
         </Router>

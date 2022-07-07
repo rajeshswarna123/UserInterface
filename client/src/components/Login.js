@@ -15,7 +15,6 @@ const Login = (props) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    storeInlocalStorage();
     fetchData("/user/login",
       {
         username,
@@ -25,18 +24,17 @@ const Login = (props) => {
       .then((data) => {
         if (!data.message) {
           console.log(data)
-          navigate("/profile")
+          storeInlocalStorage(data);
+          navigate("/profile");
         }
       })
       .catch((error) => {
-        console.log(error)
+        console.log(error);
       })
 
   }
-  const storeInlocalStorage = () => {
-    let copyUser = {...user};
-    copyUser.password = ''
-    localStorage.setItem('user', JSON.stringify(copyUser));
+  const storeInlocalStorage = (data) => {
+    localStorage.setItem('user', JSON.stringify(data));
     navigate("/profile")
   }
 
@@ -45,7 +43,7 @@ const Login = (props) => {
       <img src="" className="logo" alt="Posts App" />
       <form className="form" onSubmit={onSubmit}>
         <div className="input-group">
-          <input type="email" name="email" onChange={onChange} placeholder="Enter email" />
+          <input type="text" name="username" onChange={onChange} placeholder="Enter UserName" />
         </div>
         <div className="input-group">
           <input type="password" name="password" onChange={onChange} placeholder="Password" />
